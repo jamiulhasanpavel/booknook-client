@@ -10,7 +10,7 @@ export function getMongoDb() {
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
-    throw new Error("MONGODB_URI must be set to enable authentication.");
+    throw new Error("MONGODB_URI must be set to access MongoDB.");
   }
 
   const client =

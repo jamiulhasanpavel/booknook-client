@@ -128,3 +128,9 @@
     @apply font-sans;
   }
 }
+
+.hero-swiper {
+  --swiper-theme-color: white;
+  --swiper-pagination-bullet-inactive-color: white;
+  --swiper-pagination-bullet-inactive-opacity: 0.45;
+}
