@@ -8,6 +8,10 @@ random value and `MONGODB_URI` to your MongoDB connection string. Set
 `http://localhost:3000`. `MONGODB_DB_NAME` defaults to `booknook`.
 
 Authentication routes require both `BETTER_AUTH_SECRET` and `MONGODB_URI`.
+To enable Google sign-in, also set `GOOGLE_CLIENT_ID` and
+`GOOGLE_CLIENT_SECRET`, and add `http://localhost:3000/api/auth/callback/google`
+as an authorized redirect URI in Google Cloud. Use the corresponding production
+URL when deploying.
 Replace the placeholder contact email and social destinations in the footer
 with the project's real contact details before release.
 
