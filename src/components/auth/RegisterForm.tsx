@@ -2,9 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BookOpen, LoaderCircle } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { getSafeReturnTo } from "@/lib/redirects";
 import {
   passwordRequirements,
   registrationSchema,
@@ -33,6 +34,8 @@ function getErrorMessage(error: unknown) {
 
 export default function RegisterForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = getSafeReturnTo(searchParams.get("callbackUrl"));
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof RegistrationFormValues, string>>>({});
   const [formError, setFormError] = useState<string | null>(null);
@@ -86,7 +89,12 @@ export default function RegisterForm() {
         return;
       }
 
-      router.push("/login?registered=true");
+      const loginUrl = new URL("/login", window.location.origin);
+      loginUrl.searchParams.set("registered", "true");
+      if (callbackUrl !== "/") {
+        loginUrl.searchParams.set("callbackUrl", callbackUrl);
+      }
+      router.push(`${loginUrl.pathname}${loginUrl.search}`);
     } catch (error) {
       setFormError(getErrorMessage(error));
     } finally {
@@ -309,7 +317,11 @@ export default function RegisterForm() {
       <p className="mt-6 text-center text-sm text-muted-foreground">
         Already have an account?{" "}
         <Link
-          href="/login"
+          href={
+            callbackUrl === "/"
+              ? "/login"
+              : `/login?callbackUrl=${encodeURIComponent(callbackUrl)}`
+          }
           className="font-semibold text-primary hover:underline"
         >
           Log in
