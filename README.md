@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment setup
+
+Copy `.env.example` to `.env.local` and set `BETTER_AUTH_SECRET` to a secure,
+random value and `MONGODB_URI` to your MongoDB connection string. Set
+`BETTER_AUTH_URL` to the app's origin when it differs from
+`http://localhost:3000`. `MONGODB_DB_NAME` defaults to `booknook`.
+
+Authentication routes require both `BETTER_AUTH_SECRET` and `MONGODB_URI`.
+Replace the placeholder contact email and social destinations in the footer
+with the project's real contact details before release.
+
 ## Getting Started
 
 First, run the development server:
