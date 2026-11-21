@@ -8,7 +8,10 @@ import { getLoginHref } from "@/lib/redirects";
 
 export async function requireUser(returnTo: string) {
   await connection();
-  if (!process.env.MONGODB_URI || !process.env.BETTER_AUTH_SECRET) {
+  if (
+    (!process.env.MONGODB_URI && !process.env.MONGODB_URL) ||
+    !process.env.BETTER_AUTH_SECRET
+  ) {
     const loginHref = getLoginHref(returnTo);
     redirect(
       `${loginHref}${loginHref.includes("?") ? "&" : "?"}error=auth_unavailable`,

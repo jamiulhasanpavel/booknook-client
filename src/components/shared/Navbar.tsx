@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Logo from "@/components/shared/Logo";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 import { authClient } from "@/lib/auth-client";
 
 const publicLinks = [
@@ -57,11 +58,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-3 sm:px-6 lg:px-8"
+        className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-3 gap-y-3 px-4 py-3 sm:gap-x-6 sm:px-6 lg:px-8"
       >
         <Logo />
 
-        <div className="order-3 flex w-full flex-wrap items-center gap-x-5 gap-y-2 text-sm sm:order-2 sm:w-auto">
+        <div className="order-3 flex w-full flex-wrap items-center gap-x-4 gap-y-2 text-sm sm:order-2 sm:w-auto sm:gap-x-5">
           {[...publicLinks, ...(user ? privateLinks : [])].map((link) => (
             <Link
               key={link.href}
@@ -78,7 +79,8 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="order-2 flex items-center gap-2 sm:order-3">
+        <div className="order-2 flex items-center gap-1 sm:order-3 sm:gap-2">
+          <ThemeToggle />
           {isPending ? (
             <span className="size-9 animate-pulse rounded-full bg-muted" aria-label="Loading account" />
           ) : user ? (
@@ -125,13 +127,13 @@ export default function Navbar() {
             <>
               <Link
                 href="/login"
-                className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="site-button site-button-outline min-h-9 px-4"
               >
                 Login
               </Link>
               <Link
                 href="/register"
-                className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/85"
+                className="site-button site-button-primary min-h-9 px-4"
               >
                 Register
               </Link>

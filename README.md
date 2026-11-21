@@ -3,11 +3,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Environment setup
 
 Copy `.env.example` to `.env.local` and set `BETTER_AUTH_SECRET` to a secure,
-random value and `MONGODB_URI` to your MongoDB connection string. Set
-`BETTER_AUTH_URL` to the app's origin when it differs from
-`http://localhost:3000`. `MONGODB_DB_NAME` defaults to `booknook`.
+random value and `MONGODB_URI` (or `MONGODB_URL`) to your MongoDB connection
+string. Set `BETTER_AUTH_URL` to the app's origin when it differs from
+`http://localhost:3000`. `MONGODB_DB_NAME` defaults to `booknook_sever1`,
+the same database used by the Express backend.
 
-Authentication routes require both `BETTER_AUTH_SECRET` and `MONGODB_URI`.
+Set `BOOKNOOK_SERVER_URL` to the Express backend origin (defaults to
+`http://localhost:8000`). The client sends optional book PDFs to that backend.
+Set the same `BETTER_AUTH_SECRET` value in both the client and backend `.env`
+files; the Next.js server uses it to issue short-lived, PDF-only service tokens.
+Keep this secret server-side and never use a `NEXT_PUBLIC_` prefix.
+
+Authentication routes require `BETTER_AUTH_SECRET` and either
+`MONGODB_URI` or `MONGODB_URL`.
 To enable Google sign-in, also set `GOOGLE_CLIENT_ID` and
 `GOOGLE_CLIENT_SECRET`, and add `http://localhost:3000/api/auth/callback/google`
 as an authorized redirect URI in Google Cloud. Use the corresponding production

@@ -6,16 +6,22 @@ const globalForMongo = globalThis as typeof globalThis & {
   mongoClient?: MongoClient;
 };
 
-export function getMongoDb() {
-  const uri = process.env.MONGODB_URI;
+export function getMongoClient() {
+  const uri = process.env.MONGODB_URI ?? process.env.MONGODB_URL;
 
   if (!uri) {
-    throw new Error("MONGODB_URI must be set to access MongoDB.");
+    throw new Error(
+      "MONGODB_URI or MONGODB_URL must be set to access MongoDB.",
+    );
   }
 
   const client =
     globalForMongo.mongoClient ?? new MongoClient(uri);
   globalForMongo.mongoClient = client;
 
-  return client.db(process.env.MONGODB_DB_NAME);
+  return client;
+}
+
+export function getMongoDb() {
+  return getMongoClient().db(process.env.MONGODB_DB_NAME || "booknook_sever1");
 }

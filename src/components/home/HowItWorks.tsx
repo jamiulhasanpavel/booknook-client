@@ -1,4 +1,5 @@
 import { ArrowRight, BookOpen, HeartHandshake, Search } from "lucide-react";
+import PageHeading from "@/components/shared/PageHeading";
 
 const steps = [
   {
@@ -29,22 +30,19 @@ export default function HowItWorks() {
     <section className="bg-muted/40">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.15em] text-primary">
-            Simple as turning a page
-          </p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">
-            How Borrowing Works
-          </h2>
-          <p className="mt-3 text-muted-foreground">
-            A few easy steps bring readers and their next great book together.
-          </p>
+          <PageHeading
+            level="h2"
+            eyebrow="Simple as turning a page"
+            title="How Borrowing Works"
+            description="A few easy steps bring readers and their next great book together."
+          />
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <div className="mt-10 grid auto-rows-fr items-stretch gap-5 md:grid-cols-3">
           {steps.map(({ number, title, description, Icon }, index) => (
             <article
               key={number}
-              className="relative rounded-2xl border bg-background p-6 shadow-sm"
+              className="relative h-full rounded-2xl border bg-background p-6 shadow-sm"
             >
               <div className="flex items-center justify-between">
                 <span className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">

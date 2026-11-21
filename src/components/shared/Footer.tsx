@@ -4,6 +4,7 @@ import Logo from "@/components/shared/Logo";
 const socialLinks = [
   { href: "https://instagram.com", label: "Instagram", mark: "IG" },
   { href: "https://facebook.com", label: "Facebook", mark: "f" },
+  { href: "https://x.com", label: "X", mark: "X" },
 ];
 
 export default function Footer() {
@@ -40,9 +41,19 @@ export default function Footer() {
                 aria-label={label}
                 className="flex size-9 items-center justify-center rounded-full border text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
-                <span aria-hidden="true" className="text-xs font-semibold">
-                  {mark}
-                </span>
+                {label === "X" ? (
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    className="size-4 fill-current"
+                  >
+                    <path d="M18.901 1.153h3.68l-8.04 9.19 9.46 12.5h-7.406l-5.8-7.584-6.64 7.584h-3.68l8.6-9.83L.05 1.153h7.594l5.24 6.93zm-1.29 19.49h2.04L6.486 3.238h-2.19z" />
+                  </svg>
+                ) : (
+                  <span aria-hidden="true" className="text-xs font-semibold">
+                    {mark}
+                  </span>
+                )}
               </a>
             ))}
           </div>

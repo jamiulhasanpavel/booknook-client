@@ -78,7 +78,7 @@ export default function HeroSlider() {
                   </p>
                   <Link
                     href="/books"
-                    className="mt-8 inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-950 transition-colors hover:bg-white/85"
+                    className="site-button site-button-light mt-8"
                   >
                     Browse Books
                     <span aria-hidden="true" className="ml-2">

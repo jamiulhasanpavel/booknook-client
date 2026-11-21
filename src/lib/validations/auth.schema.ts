@@ -9,7 +9,10 @@ export const passwordRequirements = {
 export const registrationSchema = z.object({
   name: z.string().trim().min(1, "Enter your name."),
   email: z.email("Enter a valid email address."),
-  image: z.url("Enter a valid photo URL."),
+  image: z
+    .string()
+    .trim()
+    .pipe(z.union([z.literal(""), z.url("Enter a valid photo URL.")])),
   password: z
     .string()
     .min(

@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BookOpen, LoaderCircle } from "lucide-react";
+import PageHeading from "@/components/shared/PageHeading";
 import { authClient } from "@/lib/auth-client";
 import { getSafeReturnTo } from "@/lib/redirects";
 
@@ -135,12 +136,11 @@ export default function LoginForm() {
         <span className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <BookOpen aria-hidden="true" className="size-6" />
         </span>
-        <h1 className="mt-4 text-2xl font-semibold tracking-tight">
-          Welcome back
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Log in to continue your reading journey.
-        </p>
+        <PageHeading
+          className="mt-4"
+          title="Welcome back"
+          description="Log in to continue your reading journey."
+        />
       </div>
 
       {formError ? (
@@ -208,7 +208,7 @@ export default function LoginForm() {
         <button
           type="submit"
           disabled={isSubmitting || isGoogleLoading || isResettingPassword}
-          className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85 disabled:cursor-not-allowed disabled:opacity-60"
+          className="site-button site-button-primary w-full"
         >
           {isSubmitting ? (
             <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />
@@ -227,7 +227,7 @@ export default function LoginForm() {
         type="button"
         onClick={handleGoogleSignIn}
         disabled={isGoogleLoading || isSubmitting || isResettingPassword}
-        className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border bg-background px-4 text-sm font-semibold transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-60"
+        className="site-button site-button-outline w-full"
       >
         {isGoogleLoading ? (
           <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />

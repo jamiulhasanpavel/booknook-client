@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BookOpen, LoaderCircle } from "lucide-react";
+import PageHeading from "@/components/shared/PageHeading";
 import { authClient } from "@/lib/auth-client";
 import { getSafeReturnTo } from "@/lib/redirects";
 import {
@@ -81,7 +82,7 @@ export default function RegisterForm() {
         name: result.data.name,
         email: result.data.email,
         password: result.data.password,
-        image: result.data.image,
+        ...(result.data.image ? { image: result.data.image } : {}),
       });
 
       if (response.error) {
@@ -135,12 +136,11 @@ export default function RegisterForm() {
         <span className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
           <BookOpen aria-hidden="true" className="size-6" />
         </span>
-        <h1 className="mt-4 text-2xl font-semibold tracking-tight">
-          Create your BookNook account
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Join a community that loves sharing stories.
-        </p>
+        <PageHeading
+          className="mt-4"
+          title="Create your BookNook account"
+          description="Join a community that loves sharing stories."
+        />
       </div>
 
       {formError ? (
@@ -202,14 +202,13 @@ export default function RegisterForm() {
 
         <div className="space-y-1.5">
           <label htmlFor="register-photo" className="text-sm font-medium">
-            Photo URL
+            Photo URL (optional)
           </label>
           <input
             id="register-photo"
             name="image"
             type="url"
             autoComplete="url"
-            required
             value={values.image}
             onChange={(event) => updateField("image", event.target.value)}
             aria-invalid={Boolean(errors.image)}
@@ -283,7 +282,7 @@ export default function RegisterForm() {
         <button
           type="submit"
           disabled={isSubmitting || isGoogleLoading}
-          className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/85 disabled:cursor-not-allowed disabled:opacity-60"
+          className="site-button site-button-primary w-full"
         >
           {isSubmitting ? (
             <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />
@@ -302,7 +301,7 @@ export default function RegisterForm() {
         type="button"
         onClick={handleGoogleSignIn}
         disabled={isGoogleLoading || isSubmitting}
-        className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border bg-background px-4 text-sm font-semibold transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-60"
+        className="site-button site-button-outline w-full"
       >
         {isGoogleLoading ? (
           <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />

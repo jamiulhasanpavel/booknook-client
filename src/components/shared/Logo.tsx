@@ -10,7 +10,7 @@ export default function Logo({ className }: LogoProps) {
     <Link
       href="/"
       aria-label="BookNook home"
-      className={`inline-flex items-center gap-2 font-semibold tracking-tight ${className ?? ""}`}
+      className={`inline-flex items-center gap-2 font-heading font-semibold tracking-tight ${className ?? ""}`}
     >
       <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-primary-foreground">
         <BookOpen aria-hidden="true" className="size-5" />

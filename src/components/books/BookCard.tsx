@@ -1,11 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { BookOpen } from "lucide-react";
+import { motion } from "framer-motion";
 import type { BookSummary } from "@/types/book";
 
 export default function BookCard({ book }: { book: BookSummary }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-md">
+    <motion.article
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.25 }}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-shadow hover:shadow-md"
+    >
       <div className="relative aspect-[3/4] overflow-hidden bg-muted">
         {book.image ? (
           <Image
@@ -28,13 +36,13 @@ export default function BookCard({ book }: { book: BookSummary }) {
         <span className="mb-2 w-fit rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">
           {book.category}
         </span>
-        <h3 className="line-clamp-2 text-lg font-semibold leading-snug">
+        <h3 className="line-clamp-2 min-h-14 text-lg font-semibold leading-snug">
           {book.title}
         </h3>
         <p className="mt-1 text-sm text-muted-foreground">by {book.author}</p>
         <Link
           href={`/books/${encodeURIComponent(book.id)}`}
-          className="mt-auto inline-flex w-fit items-center pt-5 text-sm font-semibold text-primary hover:underline"
+          className="site-button site-button-outline mt-auto w-fit"
         >
           View Details
           <span aria-hidden="true" className="ml-1">
@@ -42,6 +50,6 @@ export default function BookCard({ book }: { book: BookSummary }) {
           </span>
         </Link>
       </div>
-    </article>
+    </motion.article>
   );
 }

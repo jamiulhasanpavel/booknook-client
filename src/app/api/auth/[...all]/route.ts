@@ -5,11 +5,14 @@ export const runtime = "nodejs";
 
 function createHandler(method: "GET" | "POST" | "PATCH" | "PUT" | "DELETE") {
   return async (request: Request) => {
-    if (!process.env.BETTER_AUTH_SECRET || !process.env.MONGODB_URI) {
+    if (
+      !process.env.BETTER_AUTH_SECRET ||
+      (!process.env.MONGODB_URI && !process.env.MONGODB_URL)
+    ) {
       return Response.json(
         {
           message:
-            "Authentication is not configured. Set BETTER_AUTH_SECRET and MONGODB_URI.",
+            "Authentication is not configured. Set BETTER_AUTH_SECRET and a MongoDB URI.",
         },
         { status: 503 },
       );
